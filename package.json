@@ -1,0 +1,25 @@
+{
+  "name": "real-world-fp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madoos/real-world-fp-js.git"
+  },
+  "keywords": [
+    "fp",
+    "js",
+    "recompose",
+    "compose"
+  ],
+  "author": "Maurice Domínguez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/madoos/real-world-fp-js/issues"
+  },
+  "homepage": "https://github.com/madoos/real-world-fp-js#readme"
+}
