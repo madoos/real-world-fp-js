@@ -20,3 +20,17 @@ const enhance = compose(
 )
 
 export default enhance(Counter)
+/*
+{
+  {
+    0
+  }
+}
+
+const enhance = compose(
+  fetch('api/'),
+  hancleCountState,
+  mapApiToProps,
+  branch(notHasData, spiner)
+)
+*/
