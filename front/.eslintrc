@@ -1,0 +1,11 @@
+{
+  "parserOptions": {
+    "ecmaVersion": "2018",
+    "sourceType": "module"
+  },
+  "extends": ["react-app", "eslint-config-prettier"],
+  "rules": {},
+  "env": {
+    "browser": true
+  }
+}

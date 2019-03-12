@@ -1,13 +1,13 @@
-const {pipe, always, path, isNil, complement, assoc, prop} = require('ramda')
-const enhance = require('express-flow-extensions')
-const {OK, UNPROCESSABLE_ENTITY} = require('http-status')
-const {flow, withStatus} = enhance
-const {findUserById} = require('./repo')
-const format = data => ({data})
-const getId = path(['params', 'id'])
+const { pipe, always, path, isNil, complement, assoc, prop } = require("ramda")
+const enhance = require("express-flow-extensions")
+const { OK, UNPROCESSABLE_ENTITY } = require("http-status")
+const { flow, withStatus } = enhance
+const { findUserById } = require("./repo")
+const format = data => ({ data })
+const getId = path(["params", "id"])
 
 const isEmpty = pipe(
-  prop('data'),
+  prop("data"),
   isNil
 )
 
@@ -19,10 +19,10 @@ const getUser = flow(
   format,
   withStatus({
     [OK]: hasData,
-    [UNPROCESSABLE_ENTITY]: isEmpty,
+    [UNPROCESSABLE_ENTITY]: isEmpty
   })
 )
 
 module.exports = {
-  getUser,
+  getUser
 }

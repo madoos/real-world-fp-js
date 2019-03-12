@@ -1,8 +1,0 @@
-export {default as branch} from './branch'
-export {default as identity} from './identity'
-export {default as lifeCycle} from './lifeCycle'
-export {default as mapProps} from './mapProps'
-export {default as withHandlers} from './withHandlers'
-export {default as withProps} from './withProps'
-export {default as withState} from './withState'
-export {default as fromStream} from './fromStream'
