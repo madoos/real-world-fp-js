@@ -8,16 +8,17 @@ const fetchHoc = curry((url, mapper, BaseComponent) => props => {
   const initialState = merge(props, status);
   const [data, changeState] = useState(initialState);
 
-  useEffect(async () => {
+  const fetchData = async () => {
     await delay(randomNumber(250, 3000));
-
     await fetch(url(props))
       .then(res => res.json())
       .then(mapper)
       .then(merge(switchValues(status)))
       .then(changeState);
+  }
 
-    return () => {};
+  useEffect(() => {
+      fetchData()
   }, []);
 
   return <BaseComponent {...data} />;
