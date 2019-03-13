@@ -16,7 +16,7 @@ const movies = [
 export default () => {
   return (
     <div className="App">
-      <Brand name="Best movies 2019" speed={120} />
+      <Brand name="2019 Best Movies" speed={120} />
       <MovieList keys="name" items={movies} />
     </div>
   );

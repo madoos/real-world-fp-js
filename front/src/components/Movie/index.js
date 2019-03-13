@@ -1,14 +1,21 @@
 import React from 'react';
+import {branch} from 'hoc';
 
-export default ({title, year, poster, incrementVotes, countVotes}) => {
+const Vote = branch(
+  ({votes}) => votes > 0,
+  ({votes}) => <p>Votes: {votes}</p>,
+  ({inc}) => <button onClick={inc}>Vote</button>,
+);
+
+export default ({title, year, poster, incrementVotes, totalVotes}) => {
   return (
     <div>
       <h3>{title}</h3>
       <p>{year}</p>
       <img src={poster} alt={title} />
-      <p>💖{countVotes}</p>
-      <button onClick={incrementVotes}>votes +</button>
-      <button onClick={incrementVotes}>votes -</button>
+      <div>
+        <Vote votes={totalVotes} inc={incrementVotes} />
+      </div>
     </div>
   );
 };

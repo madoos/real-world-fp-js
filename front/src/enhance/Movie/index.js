@@ -1,4 +1,4 @@
-import {compose, identity, prop, pipe, inc, dec, replace} from 'ramda';
+import {compose, prop, pipe, replace} from 'ramda';
 import {projection} from 'utils';
 import {fetch, branch, withState, withHandlers} from 'hoc';
 import {Spinner, Movie} from 'components';
@@ -22,10 +22,9 @@ const parseResponse = projection({
 
 const enhance = compose(
   fetch(urlFromName, parseResponse),
-  withState('countVotes', 'updateCountVotes', 0),
+  withState('totalVotes', 'updateVotes', 0),
   withHandlers({
-    incrementVotes: ({updateCountVotes, votes}) =>
-      updateCountVotes(n => votes + 1 + n),
+    incrementVotes: ({updateVotes, votes}) => updateVotes(() => votes + 1),
   }),
   branch(prop('loading'), Spinner),
 );
