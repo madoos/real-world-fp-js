@@ -16,9 +16,11 @@ const fetchHoc = curry((url, mapper, BaseComponent) => props => {
       .then(mapper)
       .then(merge(switchValues(status)))
       .then(changeState);
+
+    return () => {};
   }, []);
 
-  return <BaseComponent {...merge(props, data)} />;
+  return <BaseComponent {...data} />;
 });
 
 export default fetchHoc;

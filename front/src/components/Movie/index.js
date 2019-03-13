@@ -1,6 +1,8 @@
 import React from 'react';
 import {branch} from 'hoc';
 
+import './style.css';
+
 const Vote = branch(
   ({votes}) => votes > 0,
   ({votes}) => <p>Votes: {votes}</p>,
@@ -9,10 +11,11 @@ const Vote = branch(
 
 export default ({title, year, poster, incrementVotes, totalVotes}) => {
   return (
-    <div>
-      <h3>{title}</h3>
-      <p>{year}</p>
+    <div className="movie-component">
       <img src={poster} alt={title} />
+      <h4>
+        {title} {year}
+      </h4>
       <div>
         <Vote votes={totalVotes} inc={incrementVotes} />
       </div>
