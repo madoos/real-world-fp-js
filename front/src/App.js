@@ -1,5 +1,5 @@
 import React from 'react';
-import {Brand, MovieList} from 'enhance';
+import {Brand, MovieList} from 'enhanced';
 import './App.css';
 
 export default () => {

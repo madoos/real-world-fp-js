@@ -1,5 +1,5 @@
 import {toList, fetch, branch} from 'hoc';
-import {Movie} from 'enhance';
+import {Movie} from 'enhanced';
 import {compose, prop, isEmpty} from 'ramda';
 import {GlobalSpinner, NotFound} from 'components';
 
