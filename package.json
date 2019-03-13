@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start ecosystem.config.js",
+    "stop": "pm2 stop all && pm2 delete all",
     "slides:build": "node slides.js",
     "slides:dev": "npm run slides:build & npm run slides:start & watch 'npm run slides:build' slides",
     "slides:start": "reveal-md -w --theme moon slides.md"
@@ -29,5 +30,8 @@
     "reveal-md": "^2.4.1",
     "watch": "^1.0.2",
     "ramda": "^0.26.1"
+  },
+  "dependencies": {
+    "pm2": "^3.4.0"
   }
 }

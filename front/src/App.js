@@ -3,7 +3,7 @@ import {Brand, MovieList} from 'enhanced';
 import './App.css';
 
 export default () => {
-  const year = 2018;
+  const year = 2019;
 
   return (
     <div className="App">
