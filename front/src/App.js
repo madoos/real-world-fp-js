@@ -1,17 +1,38 @@
 import React from 'react';
 import { Movie, Spinner } from 'components'
-import { branch } from 'hoc'
-import { propEq } from "ramda"
+import { branch, fetch } from 'hoc'
+import { propEq, pipe, prop, replace } from "ramda"
+import {projection} from 'utils';
 import './App.css';
+
+const {trunc} = Math;
+
+
+const urlFromTitle = ({title}) =>
+  `https://www.omdbapi.com/?t=${title.split(' ').join('+')}&apikey=BanMePlz`;
+
+const parseResponse = projection({
+  title: 'Title',
+  year: 'Year',
+  poster: 'Poster',
+  description: 'Plot',
+  votes: pipe(
+    prop('imdbVotes'),
+    replace(',', '.'),
+    Number,
+    trunc,
+  ),
+});
 
 export default () => {
 
-  const MovieOrSpinner = branch(propEq('title', "Annihilation") ,Spinner, Movie)
+  const MovieOrSpinner = branch(prop('loading') ,Spinner, Movie)
+  const FetchMovie = fetch(urlFromTitle, parseResponse, MovieOrSpinner)
 
   return (
     <div className="App">
-      <MovieOrSpinner title="Annihilation" year="2018" poster="https://m.media-amazon.com/images/M/MV5BMTk2Mjc2NzYxNl5BMl5BanBnXkFtZTgwMTA2OTA1NDM@._V1_SX300.jpg" totalVotes={343} />
-      <MovieOrSpinner title="I Am Not a Witch" year="2019" poster="https://m.media-amazon.com/images/M/MV5BMmZiMmEzMzAtYzhiZi00NjMwLWJmNzMtMjRkNTI2YTM5N2FiXkEyXkFqcGdeQXVyNTkyMjQwNw@@._V1_SX300.jpg" totalVotes={0} />
+      <FetchMovie title="Annihilation" />
+      <FetchMovie title="I Am Not a Witch" />
     </div>
   );
 };
