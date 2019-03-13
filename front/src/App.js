@@ -1,7 +1,7 @@
 import React from 'react';
 import { Movie, Spinner } from 'components'
 import { branch, fetch } from 'hoc'
-import { propEq, pipe, prop, replace } from "ramda"
+import { compose, pipe, prop, replace } from "ramda"
 import {projection} from 'utils';
 import './App.css';
 
@@ -26,8 +26,12 @@ const parseResponse = projection({
 
 export default () => {
 
-  const MovieOrSpinner = branch(prop('loading') ,Spinner, Movie)
-  const FetchMovie = fetch(urlFromTitle, parseResponse, MovieOrSpinner)
+   const enhance = compose(
+       fetch(urlFromTitle, parseResponse),
+       branch(prop('loading') ,Spinner)
+   )
+
+  const FetchMovie = enhance(Movie)
 
   return (
     <div className="App">
