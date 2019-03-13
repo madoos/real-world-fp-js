@@ -26,12 +26,12 @@ const parseResponse = projection({
 
 export default () => {
   const enhance = compose(
+    toList({className: 'movie-list-component'}),
     fetch(urlFromTitle, parseResponse),
     branch(prop('loading'), Spinner),
   );
 
-  const FetchMovie = enhance(Movie);
-  const MovieList = toList({className: 'movie-list-component'}, FetchMovie);
+  const MovieList = enhance(Movie);
 
   const movies = [
     {title: 'Annihilation'},
