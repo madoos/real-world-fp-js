@@ -32,3 +32,5 @@ export const split = curry((separator, source) => {
 });
 
 export const withDelay = ms => concatMap(x => of(x).pipe(_delay(ms)));
+
+export const delay = t => new Promise(resolve => setTimeout(resolve, t));
