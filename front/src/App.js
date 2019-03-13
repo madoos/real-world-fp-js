@@ -1,12 +1,12 @@
 import React from 'react';
-import { Movie, Spinner } from 'components'
-import { branch, fetch } from 'hoc'
-import { compose, pipe, prop, replace } from "ramda"
+import {Movie, Spinner} from 'components';
+import {branch, fetch, toList} from 'hoc';
+import {compose, pipe, prop, replace} from 'ramda';
 import {projection} from 'utils';
 import './App.css';
+import 'enhanced/MovieList/style.css';
 
 const {trunc} = Math;
-
 
 const urlFromTitle = ({title}) =>
   `https://www.omdbapi.com/?t=${title.split(' ').join('+')}&apikey=BanMePlz`;
@@ -25,19 +25,23 @@ const parseResponse = projection({
 });
 
 export default () => {
+  const enhance = compose(
+    fetch(urlFromTitle, parseResponse),
+    branch(prop('loading'), Spinner),
+  );
 
-   const enhance = compose(
-       fetch(urlFromTitle, parseResponse),
-       branch(prop('loading') ,Spinner)
-   )
+  const FetchMovie = enhance(Movie);
+  const MovieList = toList({className: 'movie-list-component'}, FetchMovie);
 
-  const FetchMovie = enhance(Movie)
+  const movies = [
+    {title: 'Annihilation'},
+    {title: 'I Am Not a Witch'},
+    {title: 'Shoplifters'},
+  ];
 
   return (
     <div className="App">
-      <FetchMovie title="Annihilation" />
-      <FetchMovie title="I Am Not a Witch" />
+      <MovieList items={movies} />
     </div>
   );
 };
-
