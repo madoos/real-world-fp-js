@@ -1,7 +1,8 @@
 import React from 'react';
+import {curry} from 'ramda';
 
-const toList = (BaseComponent, options = {}) => ({ items, keys }) => {
-  const { className } = options;
+const toList = curry((options, BaseComponent) => ({items, keys}) => {
+  const {className} = options;
 
   return (
     <div className={className}>
@@ -11,6 +12,6 @@ const toList = (BaseComponent, options = {}) => ({ items, keys }) => {
       })}
     </div>
   );
-};
+});
 
 export default toList;

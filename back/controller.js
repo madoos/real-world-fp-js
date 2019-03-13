@@ -2,7 +2,7 @@ const { pipe, always, path, isNil, complement, assoc, prop } = require("ramda")
 const enhance = require("express-flow-extensions")
 const { OK, UNPROCESSABLE_ENTITY } = require("http-status")
 const { flow, withStatus } = enhance
-const { findUserById, findMovies } = require("./repo")
+const { findUserById, findMoviesByYear } = require("./repo")
 const format = data => ({ data })
 const getId = path(["params", "id"])
 
@@ -24,10 +24,10 @@ const getUser = flow(
 )
 
 const getMovies = flow(
-  findMovies,
+  path(["params", "year"]),
+  findMoviesByYear,
   withStatus({
-    [OK]: hasData,
-    [UNPROCESSABLE_ENTITY]: isEmpty
+    [OK]: movies => Boolean(movies.length)
   })
 )
 

@@ -16,18 +16,32 @@ const findUserById = async id => {
   return _users[id] || null
 }
 
-const findMovies = () => [
-  { name: "Zama" },
-  { name: "You Were Never Really Here" },
-  { name: "Annihilation" },
-  { name: "Mandy" },
-  { name: "The Mule" },
-  { name: "I Am Not a Witch" },
-  { name: "Shoplifters" },
-  { name: "Eighth Grade" }
-]
+const findMoviesByYear = year => {
+  const movies = {
+    2019: [
+      { name: "Zama" },
+      { name: "You Were Never Really Here" },
+      { name: "Annihilation" },
+      { name: "Mandy" },
+      { name: "The Mule" },
+      { name: "I Am Not a Witch" },
+      { name: "Shoplifters" },
+      { name: "Eighth Grade" }
+    ],
+    2018: [
+      { name: "The Night Comes for Us" },
+      { name: "Ant-Man and the Wasp" },
+      { name: "The Ritual" },
+      { name: "Shirkers" },
+      { name: "First Man" },
+      { name: "Private Life" }
+    ]
+  }
+
+  return movies[year] || []
+}
 
 module.exports = {
   findUserById,
-  findMovies
+  findMoviesByYear
 }
