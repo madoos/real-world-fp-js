@@ -7,7 +7,7 @@ export default (
   mapper,
   handleInitialState = identity,
 ) => BaseComponent => props => {
-  const info = {loading: true};
+  const info = {loading: true, completed: false};
   const [data, changeState] = useState(handleInitialState(merge(props, info)));
 
   useEffect(() => {
@@ -15,7 +15,9 @@ export default (
       fetch(url(props))
         .then(res => res.json())
         .then(mapper)
-        .then(res => changeState(merge(res, {loading: false})));
+        .then(res =>
+          changeState(merge(res, {loading: false, completed: true})),
+        );
     }, randomNumber(250, 3000));
   }, []);
 

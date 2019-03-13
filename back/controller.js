@@ -25,10 +25,7 @@ const getUser = flow(
 
 const getMovies = flow(
   path(["params", "year"]),
-  findMoviesByYear,
-  withStatus({
-    [OK]: movies => Boolean(movies.length)
-  })
+  findMoviesByYear
 )
 
 module.exports = {
