@@ -1,6 +1,6 @@
 import React from 'react';
 import {Movie, Spinner, NotFound, GlobalSpinner, Brand} from 'components';
-import {branch, fetch, toList} from 'hoc';
+import {branch, fetch, toList, withState, withHandlers} from 'hoc';
 import {compose, pipe, prop, replace, isEmpty} from 'ramda';
 import {projection} from 'utils';
 import './App.css';
@@ -28,13 +28,21 @@ const movieListUrlByYear = ({year}) =>
   `http://localhost:3001/api/movies/${year}`;
 const setFormat = movies => ({items: movies, keys: 'name'});
 
+const withMovieState = compose(
+  fetch(urlFromTitle, parseResponse),
+  withState('totalVotes', 'updateVotes', 0),
+  withHandlers({
+    incrementVotes: ({updateVotes, votes}) => updateVotes(() => votes + 1),
+  }),
+  branch(prop('loading'), Spinner),
+);
+
 const enhance = compose(
   fetch(movieListUrlByYear, setFormat),
   branch(prop('loading'), GlobalSpinner),
   branch(({items, completed}) => completed && isEmpty(items), NotFound),
   toList({className: 'movie-list-component'}),
-  fetch(urlFromTitle, parseResponse),
-  branch(prop('loading'), Spinner),
+  withMovieState,
 );
 
 const MovieList = enhance(Movie);
