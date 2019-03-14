@@ -37,11 +37,15 @@ const withMovieState = compose(
   branch(prop('loading'), Spinner),
 );
 
-const enhance = compose(
+const withMovieListState = compose(
   fetch(movieListUrlByYear, setFormat),
   branch(prop('loading'), GlobalSpinner),
   branch(({items, completed}) => completed && isEmpty(items), NotFound),
   toList({className: 'movie-list-component'}),
+);
+
+const enhance = compose(
+  withMovieListState,
   withMovieState,
 );
 
