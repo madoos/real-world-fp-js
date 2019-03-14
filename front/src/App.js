@@ -42,8 +42,8 @@ export default () => {
 
   return (
     <div className="App">
-      <MovieList items={movies} completed={true} />
-      <MovieList items={[]} completed={true} />
+      <MovieList items={movies} />
+      <MovieList items={[]} />
     </div>
   );
 };
