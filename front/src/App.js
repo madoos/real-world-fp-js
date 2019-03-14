@@ -1,5 +1,5 @@
 import React from 'react';
-import {Movie, Spinner, NotFound, GlobalSpinner} from 'components';
+import {Movie, Spinner, NotFound, GlobalSpinner, Brand} from 'components';
 import {branch, fetch, toList} from 'hoc';
 import {compose, pipe, prop, replace, isEmpty} from 'ramda';
 import {projection} from 'utils';
@@ -39,10 +39,12 @@ export default () => {
   );
 
   const MovieList = enhance(Movie);
+  const year = 2018;
 
   return (
     <div className="App">
-      <MovieList year={2018} />
+      <Brand name={`${year} Best Movies`} />
+      <MovieList year={year} />
     </div>
   );
 };
