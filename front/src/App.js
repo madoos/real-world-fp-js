@@ -24,8 +24,13 @@ const parseResponse = projection({
   ),
 });
 
+const movieListUrlByYear = ({year}) =>
+  `http://localhost:3001/api/movies/${year}`;
+const setFormat = movies => ({items: movies, keys: 'name'});
+
 export default () => {
   const enhance = compose(
+    fetch(movieListUrlByYear, setFormat),
     branch(prop('loading'), GlobalSpinner),
     branch(({items, completed}) => completed && isEmpty(items), NotFound),
     toList({className: 'movie-list-component'}),
@@ -35,17 +40,9 @@ export default () => {
 
   const MovieList = enhance(Movie);
 
-  const movies = [
-    {title: 'Annihilation'},
-    {title: 'I Am Not a Witch'},
-    {title: 'Shoplifters'},
-  ];
-
   return (
     <div className="App">
-      <MovieList items={movies} completed={true} />
-      <MovieList items={[]} completed={true} />
-      <MovieList items={[]} loading={true} />
+      <MovieList year={2018} />
     </div>
   );
 };
