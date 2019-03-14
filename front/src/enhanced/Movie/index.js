@@ -4,8 +4,8 @@ import {fetch, branch, withState, withHandlers} from 'hoc';
 import {Spinner, Movie} from 'components';
 const {trunc} = Math;
 
-const urlFromName = ({name}) =>
-  `https://www.omdbapi.com/?t=${name.split(' ').join('+')}&apikey=BanMePlz`;
+const urlFromTitle = ({title}) =>
+  `https://www.omdbapi.com/?t=${title.split(' ').join('+')}&apikey=BanMePlz`;
 
 const parseResponse = projection({
   title: 'Title',
@@ -21,7 +21,7 @@ const parseResponse = projection({
 });
 
 const enhance = compose(
-  fetch(urlFromName, parseResponse),
+  fetch(urlFromTitle, parseResponse),
   withState('totalVotes', 'updateVotes', 0),
   withHandlers({
     incrementVotes: ({updateVotes, votes}) => updateVotes(() => votes + 1),

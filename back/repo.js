@@ -19,22 +19,22 @@ const findUserById = async id => {
 const findMoviesByYear = year => {
   const movies = {
     2019: [
-      { name: "Zama" },
-      { name: "You Were Never Really Here" },
-      { name: "Annihilation" },
-      { name: "Mandy" },
-      { name: "The Mule" },
-      { name: "I Am Not a Witch" },
-      { name: "Shoplifters" },
-      { name: "Eighth Grade" }
+      { title: "Zama" },
+      { title: "You Were Never Really Here" },
+      { title: "Annihilation" },
+      { title: "Mandy" },
+      { title: "The Mule" },
+      { title: "I Am Not a Witch" },
+      { title: "Shoplifters" },
+      { title: "Eighth Grade" }
     ],
     2018: [
-      { name: "The Night Comes for Us" },
-      { name: "Ant-Man and the Wasp" },
-      { name: "The Ritual" },
-      { name: "Shirkers" },
-      { name: "First Man" },
-      { name: "Private Life" }
+      { title: "The Night Comes for Us" },
+      { title: "Ant-Man and the Wasp" },
+      { title: "The Ritual" },
+      { title: "Shirkers" },
+      { title: "First Man" },
+      { title: "Private Life" }
     ]
   }
 
