@@ -28,19 +28,18 @@ const movieListUrlByYear = ({year}) =>
   `http://localhost:3001/api/movies/${year}`;
 const setFormat = movies => ({items: movies, keys: 'name'});
 
-export default () => {
-  const enhance = compose(
-    fetch(movieListUrlByYear, setFormat),
-    branch(prop('loading'), GlobalSpinner),
-    branch(({items, completed}) => completed && isEmpty(items), NotFound),
-    toList({className: 'movie-list-component'}),
-    fetch(urlFromTitle, parseResponse),
-    branch(prop('loading'), Spinner),
-  );
+const enhance = compose(
+  fetch(movieListUrlByYear, setFormat),
+  branch(prop('loading'), GlobalSpinner),
+  branch(({items, completed}) => completed && isEmpty(items), NotFound),
+  toList({className: 'movie-list-component'}),
+  fetch(urlFromTitle, parseResponse),
+  branch(prop('loading'), Spinner),
+);
 
-  const MovieList = enhance(Movie);
-  const year = 2018;
+const MovieList = enhance(Movie);
 
+export default ({year}) => {
   return (
     <div className="App">
       <Brand name={`${year} Best Movies`} />
