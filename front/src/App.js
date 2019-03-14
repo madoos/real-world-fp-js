@@ -1,7 +1,7 @@
 import React from 'react';
-import {Movie, Spinner} from 'components';
+import {Movie, Spinner, NotFound} from 'components';
 import {branch, fetch, toList} from 'hoc';
-import {compose, pipe, prop, replace} from 'ramda';
+import {compose, pipe, prop, replace, isEmpty} from 'ramda';
 import {projection} from 'utils';
 import './App.css';
 import 'enhanced/MovieList/style.css';
@@ -26,6 +26,7 @@ const parseResponse = projection({
 
 export default () => {
   const enhance = compose(
+    branch(({items}) => isEmpty(items), NotFound),
     toList({className: 'movie-list-component'}),
     fetch(urlFromTitle, parseResponse),
     branch(prop('loading'), Spinner),
@@ -41,7 +42,8 @@ export default () => {
 
   return (
     <div className="App">
-      <MovieList items={movies} />
+      <MovieList items={movies} completed={true} />
+      <MovieList items={[]} completed={true} />
     </div>
   );
 };
